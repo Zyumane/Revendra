@@ -41,3 +41,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Main hub
+    uniqueID: 3937972931
+    locked: 0
+  - name: Vehicle ty 1 land
+    uniqueID: 411664947
+    locked: 0
+  - name: Vehicle ty 2 Air
+    uniqueID: 4267573623
+    locked: 0
+  - name: Vehicle ty 3 Water
+    uniqueID: 4227468637
+    locked: 0
+  - name: Vehicle ty 4 scout
+    uniqueID: 129554311
+    locked: 0
+  - name: Vehicle  ty 5 radar
+    uniqueID: 4254731265
+    locked: 0
+  - name: Vehicle ty 6 torret
+    uniqueID: 3585552885
+    locked: 0
