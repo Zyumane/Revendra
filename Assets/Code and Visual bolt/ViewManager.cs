@@ -28,7 +28,7 @@ public class ViewManager : MonoBehaviour
 
     private T instantiate<T>() where T : ViewController
     {
-        var view = views.Find(view => view is T);
+        var view = views.Find(View => View is T);
         if (view)
         {
             return Instantiate((T)view, viewsLayers.transform);
@@ -50,7 +50,7 @@ public class ViewManager : MonoBehaviour
         }
         else
         {
-            var result = Instantiate<T>();
+            var result = instantiate<T>();
             instancedViews.Add(result);
             result.Show();
             return result;
