@@ -8,6 +8,8 @@ using UnityEngine.UI;
 using System;
 using System.Net;
 using ZXing.QrCode.Internal;
+using System.Net.NetworkInformation;
+using System.Diagnostics;
 
 public class Net_Mgr 
 {
@@ -38,12 +40,13 @@ public class Net_Mgr
     public override void OnStartHost()
     {
         base.OnStartHost();
-        var address = $"(IP_Local):{networkPort}";
-        Debug.LogWarning("Address: " + address);
-        QRcodeShare = generateQR(address);
+        var address = $"{IP_Local}:{networkPort}";
+        UnityEngine.Debug.LogWarning("Address: " + address);
+        QRcodeShare = generateQrBox(address);
         qrImg.texture = QRcodeShare;
         if (!QRcodeShare)
-            Debug.LogWarning("the QR Code is null");
+            UnityEngine.Debug.LogWarning("QRcodeShare is null");
+
 
     }
     
@@ -53,7 +56,7 @@ public class Net_Mgr
         camTexture = new WebCamTexture();
         camTexture.requestedHeight = Screen.height;
         camTexture.requestedWidth = Screen.width;
-        qrCamera.texture = camTexture;
+        qrCam.texture = camTexture;
     }
 
     void Update()
@@ -64,12 +67,43 @@ public class Net_Mgr
             var resulte = barcode.Decode(camTexture.GetPixels32(),camTexture.width,camTexture.height);
             if(resulte != null)
             {
-                Debug.LogWarning("Decode result: " +resulte)
+                UnityEngine.Debug.LogWarning("Decode result: " + resulte);
                 try
                 {
-                    var
+                    var address = resulte.ToString().Split(':');
+                    System.Net.NetworkAccess networkAddress = address[0];
+                    networkPort = int.Parse(address[1]);
+
+                    ToggleQrCam();
+                }
+                catch(Exception ext)
+                {
+                    UnityEngine.Debug.LogError("result is in unexpected format.");
                 }
             }
         }
+    }
+
+    private static Color32[] Encode(string textForEmcoding, int width, int height)
+    {
+        var writerT = new BarcodeWriter
+        {
+            Format = BarcodeFormat.QR_CODE,
+            Options = new QrCodeEncodingOptions
+            {
+                Height = height,
+                Width = width
+            }
+        };
+
+        return writerT.Write(textForEmcoding);
+    }
+
+    public Texture2D generateQrBox(string text)
+    {
+        var encodedT = new Texture2D(255, 255);
+        var color32 = Encode(text, encodedT.width, encodedT.height);
+        encodedT.SetPixels32(color32);
+        return encodedT;
     }
 }
