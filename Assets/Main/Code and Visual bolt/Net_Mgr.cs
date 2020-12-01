@@ -11,7 +11,7 @@ using ZXing.QrCode.Internal;
 using System.Net.NetworkInformation;
 using System.Diagnostics;
 
-public class Net_Mgr 
+public class Net_Mgr : NetworkManager
 {
     string IP_Local = "192.168.1.64";
 
@@ -37,10 +37,10 @@ public class Net_Mgr
             camTexture.Stop();
     }
 
-    public override void OnStartHost()
+    public override void OnStartHost()   
     {
-        base.OnStartHost();
-        var address = $"{IP_Local}:{networkPort}";
+        base.OnStartHost();    
+        var address = $"{IP_Local}:{networkPort}";  
         UnityEngine.Debug.LogWarning("Address: " + address);
         QRcodeShare = generateQrBox(address);
         qrImg.texture = QRcodeShare;
@@ -71,8 +71,8 @@ public class Net_Mgr
                 try
                 {
                     var address = resulte.ToString().Split(':');
-                    System.Net.NetworkAccess networkAddress = address[0];
-                    networkPort = int.Parse(address[1]);
+                    networkAddress = address[0]; 
+                    networkPort = int.Parse(address[1]);   
 
                     ToggleQrCam();
                 }
@@ -101,7 +101,7 @@ public class Net_Mgr
 
     public Texture2D generateQrBox(string text)
     {
-        var encodedT = new Texture2D(255, 255);
+        var encodedT = new Texture2D(254, 254);
         var color32 = Encode(text, encodedT.width, encodedT.height);
         encodedT.SetPixels32(color32);
         return encodedT;
