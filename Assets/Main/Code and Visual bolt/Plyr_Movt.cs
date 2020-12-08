@@ -40,7 +40,7 @@ public class Plyr_Movt : MonoBehaviour
             }
             else if (_velocity.y < 0)
             {
-                _direction = new Vector3(0.5f, -0.5f);
+                _direction = new Vector3(-0.5f, -0.5f);
             }
             else
             {
@@ -64,18 +64,18 @@ public class Plyr_Movt : MonoBehaviour
         }
 
         transform.position += _direction;
+        UpdateFog();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         transform.position -= _direction;
-        UpdateFog();
     }
 
     void UpdateFog()
     {
         Vector3Int currentPlyPos = fogtiles.WorldToCell(transform.position);
-        for (int i = 3; i <= 3; i++)
+        for (int i = -3; i <= 3; i++)
         {
             for (int j = -3; j <= 3; j++)
             {
