@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Test Fields/Scenes/dev Map.unity
-    guid: 8a372d58ce368ca42a73d68c5872f3c5
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Main/Scenes/Main Menu Ui.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
-    path: Assets/Main/Scenes/Ballte Scene.unity
-    guid: 25347bdd8fafee747a03bebf6d784955
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
