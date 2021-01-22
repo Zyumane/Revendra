@@ -1,19 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using ZXing;
 using ZXing.QrCode;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System;
-using System.Net;
-using ZXing.QrCode.Internal;
-using System.Net.NetworkInformation;
-using System.Diagnostics;
 
 public class Net_Mgr : NetworkManager
 {
-    string IP_Local = "192.168.1.64";
+    string IP_Local = "192.168.1.65";
 
     Texture2D QRcodeShare;
 
@@ -101,9 +95,10 @@ public class Net_Mgr : NetworkManager
 
     public Texture2D generateQrBox(string text)
     {
-        var encodedT = new Texture2D(254, 254);
+        var encodedT = new Texture2D(256, 256);
         var color32 = Encode(text, encodedT.width, encodedT.height);
         encodedT.SetPixels32(color32);
+        encodedT.Apply();
         return encodedT;
     }
 }
